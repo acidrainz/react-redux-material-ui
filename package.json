@@ -1,0 +1,42 @@
+{
+  "name": "social-app",
+  "version": "0.0.1",
+  "description": "Social listening tool for NewsCorp AU",
+  "private": true,
+  "dependencies": {
+    "babel-core": "6.14.0",
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.2",
+    "bookshelf": "^0.10.4",
+    "express": "^4.15.5",
+    "fs": "0.0.2",
+    "jsonwebtoken": "^8.0.1",
+    "jwt-simple": "^0.5.1",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "md5": "^2.2.1",
+    "morgan": "^1.8.2",
+    "mysql": "^2.14.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "when": "^3.7.8"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "concurrently": "3.1.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.9.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
