@@ -9,14 +9,14 @@ const _ = require('lodash');
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { email,password } = req.body;
   Promise.coroutine(function*() {
     const user = yield User.where('email', email).fetch();
     if (!user) { res.json({ success: false, message: 'Authentication failed. User not found.' }); };
     const isValidPassword = yield user.validPassword(password);
     if (isValidPassword) {
       const token = jwt.encode(user.omit('password'), securityConfig.jwtSecret);
-      res.json({ success: true, token: `jwt ${token}` });
+      res.json({ success: true, token: `jwt ${token}`,user:user });
     } else {
       res.json({ success: false, message: 'Authentication failed. Wrong password.' });
     }

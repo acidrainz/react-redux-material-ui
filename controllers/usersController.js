@@ -12,7 +12,7 @@ router.get('/', jwtAuth,function(req, res) {
         res.json(users);
     });
 });
-router.get('/securedArea', passport.authenticate('jwt', { session: false }), authorizedRoles('ROLE_ADMIN'), (req, res) => {
+router.get('/securedArea', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({messge: "You made it to the secure area"});
 });
 
