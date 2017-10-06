@@ -2,6 +2,7 @@ import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
+import {toastr} from 'react-redux-toastr'
 
 export const userActions = {
     login,
@@ -14,18 +15,20 @@ export const userActions = {
 function login(email, password) {
     return dispatch => {
         dispatch(request({ email }));
-
         userService.login(email, password)
             .then(
                 user => {
                     dispatch(success(user));
-                    history.push('/dashboard');
+                    history.push('/');
                 },
+
                 error => {
+                    dispatch(toastr.error('The message'));
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
             );
+
     };
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }

@@ -90,7 +90,6 @@ class LoginPage extends React.Component {
       password: '',
       open:false,
       submitted: false,
-      errorMessage:''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -110,13 +109,7 @@ class LoginPage extends React.Component {
         this.setState({ submitted: true });
         const { email, password } = this.state;
         if (email && password) {
-              if(this.props.alert){
-                this.setState({
-                  open: true,
-                  errorMessage:(this.props.alert.message) ? this.props.alert.message : 'Incorrect Email or Password'
-                });
-              }
-              this.props.actions.login(email, password);
+            this.props.actions.login(email, password);
         }
 
   }
@@ -126,22 +119,16 @@ class LoginPage extends React.Component {
     });
   };
 
+
   render() {
-    const { loggingIn } = this.props;
     const { email, password, submitted } = this.state;
-    const { alert } = this.props;
 
 
       return (
         <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
 
-        <Snackbar
-          open={this.state.open}
-          message={this.state.errorMessage}
-          autoHideDuration={2000}
-          onRequestClose={this.handleRequestClose}
-        />
+
           <div style={styles.loginContainer}>
 
             <Paper style={styles.paper}>
@@ -154,6 +141,9 @@ class LoginPage extends React.Component {
                   name="email" value={email}
                   onChange={this.handleChange}
                 />
+                {submitted && !email &&
+                    <div className="help-block">Email is required</div>
+                }
                 <TextField
                   hintText="Password"
                   floatingLabelText="Password"
@@ -163,6 +153,9 @@ class LoginPage extends React.Component {
                   value={password}
                   onChange={this.handleChange}
                 />
+                {submitted && !password &&
+                    <div className="help-block">Password is required</div>
+                }
 
                 <div>
 
@@ -189,12 +182,9 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
-        const { alert } = state;
-
+    const  auth  = state.authentication;
     return {
-        loggingIn,
-        alert
+        auth
     };
 
 }

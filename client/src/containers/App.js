@@ -9,6 +9,7 @@ import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import Dashboard  from './DashboardPage';
 import LoginPage  from './LoginPage';
+import ReduxToastr from 'react-redux-toastr'
 
 class App extends React.Component {
     constructor(props) {
@@ -28,6 +29,15 @@ class App extends React.Component {
         const basePath = '/' + location.pathname.split('/')[1];
         return (
             <div>
+
+            <ReduxToastr
+              timeOut={4000}
+              newestOnTop={false}
+              preventDuplicates
+              position="top-left"
+              transitionIn="fadeIn"
+              transitionOut="fadeOut"
+              progressBar/>
 
             <Router history={history}>
                 <div>

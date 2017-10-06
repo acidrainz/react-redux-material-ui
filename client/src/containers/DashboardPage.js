@@ -17,10 +17,9 @@ import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth';
 import ThemeDefault from '../theme-default';
 import Data from '../data';
 import { Link } from 'react-router-dom'
-
-
-
-
+import { connect } from 'react-redux';
+import { userActions } from '../_actions';
+import {bindActionCreators} from 'redux';
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
@@ -130,4 +129,21 @@ class DashboardPage extends React.Component {
     );
   }
 }
-export default DashboardPage;
+
+function mapStateToProps(state) {
+    const { loggedin } = state.authentication.loggedIn;
+    return {
+        loggedin
+    };
+
+
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

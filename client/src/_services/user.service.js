@@ -26,7 +26,6 @@ function login(email, password) {
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }
-
             return response.json();
         })
         .then(user => {
