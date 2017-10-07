@@ -22,7 +22,7 @@ class App extends React.Component {
         return (
             <div>
             <ReduxToastr
-              timeOut={4000}
+              timeOut={3000}
               newestOnTop={false}
               preventDuplicates
               position="top-left"

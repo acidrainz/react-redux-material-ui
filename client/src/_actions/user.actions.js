@@ -25,6 +25,7 @@ function login(email, password) {
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
+                    invalid(error);
 
                 }
             );
@@ -33,7 +34,11 @@ function login(email, password) {
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function failure(error){ return { type: userConstants.LOGIN_FAILURE, error } }
+    function invalid(error){
+        toastr.error('Oops! Something went wrong!', 'Email or Password is incorrect. Please try again.')
+
+    }
 
 }
 
