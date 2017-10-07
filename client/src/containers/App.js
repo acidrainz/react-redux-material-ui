@@ -33,7 +33,7 @@ class App extends React.Component {
                 <div>
                     <PrivateRoute exact path='/dashboard' component={Dashboard} />
                     <Route path="/login" component={LoginPage} />
-                    <Route path="/form" component={FormPage} />
+                    <PrivateRoute exact path="/form" component={FormPage} />
 
                 </div>
             </Router>

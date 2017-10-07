@@ -21,28 +21,34 @@ import Data from '../data';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      open: false
+    };
   }
 
+  handleDrawer(bool) {
+    this.setState({ open: bool });
+  }
 
   render() {
+    const navDrawerOpen = this.state.open;
+    const paddingLeftDrawerOpen = 236;
+
     const styles = {
-        header: {
-          paddingLeft: 200
-        },
-        container: {
-          margin: '80px 20px 20px 15px'
-        }
-      };
+      container: {
+        margin: '80px 20px 20px 15px',
+        paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
+
+      }
+    };
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div>
-            <NavbarComponent/>
-
+            <NavbarComponent handleDrawer={this.handleDrawer.bind(this)}/>
               <div style={styles.container}>
                 <div>
                   <h3 style={globalStyles.navigation}>Application / Dashboard</h3>
@@ -109,10 +115,10 @@ class DashboardPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loggedin } = state.authentication.loggedIn;
-    return {
-        loggedin
-    };
+  const { loggedin } = state.authentication.loggedIn;
+  return {
+    loggedin
+  };
 
 
 }
