@@ -9,27 +9,18 @@ import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import Dashboard  from './DashboardPage';
 import LoginPage  from './LoginPage';
+import FormPage  from './FormPage';
+
 import ReduxToastr from 'react-redux-toastr'
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-
-        // this line is required to work on plunker because the app preview runs on a subfolder url
-        history.push('/');
-
-        const { dispatch } = this.props;
-        history.listen((location, action) => {
-            // clear alert on location change
-            dispatch(alertActions.clear());
-        });
     }
 
     render() {
-        const basePath = '/' + location.pathname.split('/')[1];
         return (
             <div>
-
             <ReduxToastr
               timeOut={4000}
               newestOnTop={false}
@@ -38,11 +29,12 @@ class App extends React.Component {
               transitionIn="fadeIn"
               transitionOut="fadeOut"
               progressBar/>
-
             <Router history={history}>
                 <div>
-                    <PrivateRoute exact path='/' component={Dashboard} />
+                    <PrivateRoute exact path='/dashboard' component={Dashboard} />
                     <Route path="/login" component={LoginPage} />
+                    <Route path="/form" component={FormPage} />
+
                 </div>
             </Router>
             </div>
