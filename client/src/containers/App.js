@@ -27,8 +27,7 @@ class App extends React.Component {
               preventDuplicates
               position="top-left"
               transitionIn="fadeIn"
-              transitionOut="fadeOut"
-              progressBar/>
+              transitionOut="fadeOut"/>
             <Router history={history}>
                 <div>
                     <PrivateRoute exact path='/dashboard' component={Dashboard} />
