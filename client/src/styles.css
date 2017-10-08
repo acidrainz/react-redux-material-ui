@@ -30,3 +30,16 @@ a:hover {
 .m-b-15 {
   margin-bottom: 15px
 }
+.help-block{
+  font-style: italic;
+  color:#f00;
+  font-size:12px;
+}
+.top-left{
+  width: 450px;
+}
+.redux-toastr .toastr .rrt-middle-container{
+  width: 80%;
+  margin-left:60px;
+}
+

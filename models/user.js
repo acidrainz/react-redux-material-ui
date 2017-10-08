@@ -7,8 +7,8 @@ const Role = require('./role');
 const securityConfig = require('../config/security-config');
 
 module.exports = bookshelf.Model.extend({
-  tableName: 'user',
-  hasTimestamps: true,
+  tableName: 'users',
+  hasTimestamps: ['created_at', 'updated_at'],
 
   roles() {
     return this.belongsToMany(Role, 'user_role');
