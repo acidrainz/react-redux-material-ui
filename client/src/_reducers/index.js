@@ -7,13 +7,15 @@ import { users } from './users.reducer';
 import { alert } from './alert.reducer';
 import facebookLogin from './login-reducer.js';
 import userInformation from './user-information.js'
+import brandInformation from './brand-information.js'
 
 const rootReducer = combineReducers({
   authentication,
   toastr,
   registration,
   facebookLogin,
-  userInformation
+  userInformation,
+  brandInformation,
   users,
   alert
 });

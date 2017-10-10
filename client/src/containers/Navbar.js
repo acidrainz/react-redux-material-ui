@@ -30,7 +30,6 @@ class NavbarComponent extends React.Component {
 
   render() {
     let { navDrawerOpen } = this.state;
-    console.log(navDrawerOpen)
     const paddingLeftDrawerOpen = 236;
     const styles = {
       header: {

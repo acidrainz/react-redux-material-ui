@@ -1,27 +1,26 @@
-import { socialConstants } from '../_constants';
-import { socialService } from '../_services';
-import { history } from '../_helpers';
-import {toastr} from 'react-redux-toastr'
+
 
 export const socialActions = {
     getLoginStatus,
     startFetching,
-    getUserInformation
+    getUserInformation,
+    getBrandInformation
 };
 
 
 
 
-
-
  function getLoginStatus(status) {
-  return { type: 'loginResponse', payload: status };
+  return { type: 'GET_LOGIN_STATUS', payload: status };
 }
 
  function startFetching() {
-  return { type: 'fetching' };
+  return { type: 'FETCHING' };
 }
 
  function getUserInformation(userInformation) {
-  return { type: 'getUserInformation', payload: userInformation };
+  return { type: 'GET_USER_INFORMATION', payload: userInformation };
+}
+function getBrandInformation(brandInformation) {
+  return { type: 'GET_BRAND_INFORMATION', payload: brandInformation };
 }

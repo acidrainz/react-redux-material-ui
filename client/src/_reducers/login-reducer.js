@@ -1,6 +1,6 @@
 export default function (state = { isConnected: null, isWorking: null }, action) {
   switch (action.type) {
-    case 'loginResponse':
+    case 'GET_LOGIN_STATUS':
       if (action.payload === 'connected') {
         return ({
           isConnected: true,
@@ -12,7 +12,7 @@ export default function (state = { isConnected: null, isWorking: null }, action)
           isWorking: false
         });
       }
-    case 'fetching':
+    case 'FETCHING':
       return ({
         isConnected: state.isConnected,
         isWorking: true

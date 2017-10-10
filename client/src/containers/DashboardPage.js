@@ -1,3 +1,5 @@
+/* global FB */
+
 import React from 'react';
 import { cyan600, pink600, purple600, orange600 } from 'material-ui/styles/colors';
 import Assessment from 'material-ui/svg-icons/action/assessment';
@@ -24,20 +26,44 @@ import { bindActionCreators } from 'redux';
 import FacebookReduxLogin from 'facebook-login-redux-react';
 
 
-
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false
     };
-        this.handleFetch = this.handleFetch.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.getUserInformation = this.getUserInformation.bind(this);
 
   }
 
-  handleFetch(e){
-    e.preventDefault();
+  login(response) {
+    this.props.actions.getLoginStatus(response.status);
+  }
+  logout(response) {
+    this.props.actions.getLoginStatus(response.status);
+    this.props.actions.getUserInformation(null);
+    this.props.actions.getBrandInformation(null);
 
+  }
+  getUserInformation() {
+
+    if (this.props.facebookLogin.isConnected && !this.props.userInformation) {
+      FB.api('/me', 'GET', { fields: 'id,name,email' },
+        userInformation => {
+          this.props.actions.getUserInformation(userInformation);
+        }
+      );
+      FB.api('/me/accounts', 'GET',
+        brandInformation => {
+          this.props.actions.getBrandInformation(brandInformation);
+        }
+      );
+    }
+
+  var obj = JSON.stringify(this.props.brandInformation);
+  console.log(obj[0][0])
   }
 
   handleDrawer(bool) {
@@ -48,7 +74,8 @@ class DashboardPage extends React.Component {
   render() {
     const navDrawerOpen = this.state.open;
     const paddingLeftDrawerOpen = 236;
-
+    const { id, name, email } = this.props.userInformation || { id: null, name: null, email: null };
+    this.getUserInformation();
     const styles = {
       container: {
         margin: '80px 20px 20px 15px',
@@ -58,64 +85,27 @@ class DashboardPage extends React.Component {
     };
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
+
         <div>
+
             <NavbarComponent handleDrawer={this.handleDrawer.bind(this)}/>
               <div style={styles.container}>
                 <div>
                   <h3 style={globalStyles.navigation}>Application / Dashboard</h3>
-                      <div className="row">
 
-                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-                          <InfoBox Icon={ShoppingCart}
-                                   color={pink600}
-                                   title="Total Profit"
-                                   value="1500k"
-                          />
-                        </div>
+                        <FacebookReduxLogin
+                          appId='598958063634916'
+                          verbose={false}
+                          version={'v2.10'}
+                          onWillMount={this.login}
+                          onLoginEvent={this.login}
+                          onLogoutEvent={this.logout}
+                          onClick={() => this.props.actions.startFetching()}
+                        />
 
 
-                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-                          <InfoBox Icon={ThumbUp}
-                                   color={cyan600}
-                                   title="Likes"
-                                   value="4231"
-                          />
-                        </div>
 
-                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-                          <InfoBox Icon={Assessment}
-                                   color={purple600}
-                                   title="Sales"
-                                   value="460"
-                          />
-                        </div>
 
-                        <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-                          <InfoBox Icon={Face}
-                                   color={orange600}
-                                   title="New Members"
-                                   value="248"
-                          />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-                          <NewOrders data={Data.dashBoardPage.newOrders}/>
-                        </div>
-
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-b-15">
-                          <MonthlySales data={Data.dashBoardPage.monthlySales}/>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-                          <RecentlyProducts data={Data.dashBoardPage.recentProducts}/>
-                        </div>
-
-                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-                          <BrowserUsage data={Data.dashBoardPage.browserUsage}/>
-                        </div>
-                      </div>
                 </div>
               </div>
         </div>
@@ -126,9 +116,10 @@ class DashboardPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedin } = state.authentication.loggedIn;
   return {
-    loggedin
+    userInformation: state.userInformation,
+    brandInformation: state.brandInformation,
+    facebookLogin: state.facebookLogin
   };
 
 
