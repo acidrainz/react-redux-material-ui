@@ -9,6 +9,8 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "bookshelf": "^0.10.4",
+    "bookshelf-modelbase": "^2.10.4",
+    "eslint-plugin-import": "^2.2.0",
     "express": "^4.15.5",
     "fs": "0.0.2",
     "jsonwebtoken": "^8.0.1",

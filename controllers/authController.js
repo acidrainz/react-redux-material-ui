@@ -12,6 +12,9 @@ router.post('/login', (req, res) => {
   const { email,password } = req.body;
   Promise.coroutine(function*() {
     const user = yield User.where('email', email).fetch();
+        if(!user){
+          res.status(500).json({success: false, msg: 'Authentication failed'});
+        }
         const isValidPassword = yield user.validPassword(password);
         if (isValidPassword) {
             const token = jwt.encode(user.omit('password'), securityConfig.jwtSecret);

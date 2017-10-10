@@ -14,23 +14,34 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from '../components/Header';
 import LeftDrawer from '../components/LeftDrawer';
 import NavbarComponent from './Navbar';
-
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth';
 import ThemeDefault from '../theme-default';
 import Data from '../data';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { userActions } from '../_actions';
+import { socialActions } from '../_actions';
 import { bindActionCreators } from 'redux';
+import FacebookReduxLogin from 'facebook-login-redux-react';
+
+
+
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false
     };
+        this.handleFetch = this.handleFetch.bind(this);
+
+  }
+
+  handleFetch(e){
+    e.preventDefault();
+
   }
 
   handleDrawer(bool) {
+
     this.setState({ open: bool });
   }
 
@@ -126,7 +137,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(userActions, dispatch)
+    actions: bindActionCreators(socialActions, dispatch)
   };
 }
 

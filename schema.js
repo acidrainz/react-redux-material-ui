@@ -16,14 +16,13 @@ var Schema = {
   },
   social_managers:{
     id: { type: 'increments', nullable: false, primary: true },
-    user_id: { type: 'integer', nullable: false, maxlength: 11 , unsigned:true,references:'users.id'},
-    facebook_id: { type: 'integer', nullable: false, maxlength: 255},
-    account_type:{type:'string',maxlength :255,nullable:false },
+    user_id: { type: 'integer', nullable: false, maxlength: 255 , unsigned:true,references:'users.id'},
+    social_id: { type: 'varchar', nullable: false, maxlength: 255},
+    display_name: { type: 'varchar', nullable: false, maxlength: 255},
+    provider:{type:'string',maxlength :255,nullable:false },
     access_token:{type:'string', maxlength :500,nullable:true },
-    longlive_token:{type:'string',maxlength :500,nullable:true },
     created_at: { type: 'dateTime', nullable: false },
     updated_at: { type: 'dateTime', nullable: false }
-
 
   }
 };
