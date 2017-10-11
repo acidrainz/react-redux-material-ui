@@ -7,7 +7,7 @@ const Role = require('./role');
 const securityConfig = require('../config/security-config');
 
 module.exports = bookshelf.Model.extend({
-  tableName: 'users',
+  tableName: 'dbo.Users',
   hasTimestamps: ['created_at', 'updated_at'],
 
   roles() {

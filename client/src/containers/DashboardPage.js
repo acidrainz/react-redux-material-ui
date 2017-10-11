@@ -64,14 +64,10 @@ class DashboardPage extends React.Component {
 
 
   }
-    async componentDidMount(){
-      const result = await this.props.actions.getBrandInformation() /* do whatever you want with result */
-      console.log(result)
 
-    }
+  componentWillMount(){}
 
   handleDrawer(bool) {
-
     this.setState({ open: bool });
   }
 

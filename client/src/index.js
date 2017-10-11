@@ -9,9 +9,10 @@ import 'font-awesome/css/font-awesome.css';
 import 'flexboxgrid/css/flexboxgrid.css';
 import { Provider } from 'react-redux';
 import { App } from './containers/App';
-
 import { store } from './_helpers';
 injectTapEventPlugin();
+
+
 
 render(
    <Provider store={store}>

@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const authController = require('./controllers/authController');
+const facebookController = require('./controllers/facebookController');
 const userController = require('./controllers/usersController');
 const configurePassport = require('./config/passport-jwt-config');
 const apiPrefix = "/api";
@@ -22,6 +23,7 @@ app.use(morgan('dev'));
 
 app.use(apiPrefix + '/auth', authController);
 app.use(apiPrefix + '/users', userController);
+app.use(apiPrefix + '/facebook', facebookController);
 
 
 
