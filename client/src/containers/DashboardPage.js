@@ -38,6 +38,7 @@ class DashboardPage extends React.Component {
 
   }
 
+
   login(response) {
     this.props.actions.getLoginStatus(response.status);
   }
@@ -47,17 +48,21 @@ class DashboardPage extends React.Component {
     this.props.actions.getBrandInformation(null);
 
   }
+
+
   getUserInformation() {
 
     if (this.props.facebookLogin.isConnected && !this.props.userInformation) {
       FB.api('/me', 'GET', { fields: 'id,name,email' },
         userInformation => {
-          this.props.actions.getUserInformation(userInformation);
+          this.props.actions.getUserInformation(userInformation).then(function(user) {
+          });
         }
       );
       FB.api('/me/accounts', 'GET',
         brandInformation => {
-          this.props.actions.getBrandInformation(brandInformation);
+          this.props.actions.getBrandInformation(brandInformation).then(function(brands) {
+          });
         }
       );
     }
@@ -65,10 +70,14 @@ class DashboardPage extends React.Component {
 
   }
 
-  componentWillMount(){}
 
   handleDrawer(bool) {
     this.setState({ open: bool });
+  }
+
+    componentDidMount() {
+       const result =  this.props.brandInformation /* do whatever you want with result */
+       console.log(result)
   }
 
   render() {
@@ -87,14 +96,13 @@ class DashboardPage extends React.Component {
       <MuiThemeProvider muiTheme={ThemeDefault}>
 
         <div>
-
             <NavbarComponent handleDrawer={this.handleDrawer.bind(this)}/>
               <div style={styles.container}>
                 <div>
                   <h3 style={globalStyles.navigation}>Application / Dashboard</h3>
 
                         <FacebookReduxLogin
-                          appId='598958063634916'
+                          appId='1413936068720959'
                           verbose={false}
                           version={'v2.10'}
                           onWillMount={this.login}
