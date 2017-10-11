@@ -5,12 +5,12 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "facebook-login-redux-react": "^0.4.1",
-        "react": "15.4.2",
-    "react-dom": "15.4.2",
     "flexboxgrid": "6.3.1",
     "font-awesome": "4.7.0",
     "history": "4.5.1",
     "material-ui": "0.17.0",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
     "react-redux": "^5.0.5",
     "react-redux-toastr": "^7.1.5",
     "react-router": "^4.2.0",
@@ -20,6 +20,7 @@
     "recharts": "0.20.8",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.4.1",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {

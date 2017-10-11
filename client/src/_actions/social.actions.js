@@ -19,8 +19,8 @@ export const socialActions = {
 }
 
  function getUserInformation(userInformation) {
-  return { type: 'GET_USER_INFORMATION', payload: userInformation };
+  return { type: 'GET_USER_INFORMATION', payload: Promise.resolve(userInformation)};
 }
 function getBrandInformation(brandInformation) {
-  return { type: 'GET_BRAND_INFORMATION', payload: brandInformation };
+  return { type: 'GET_BRAND_INFORMATION', payload: Promise.resolve(brandInformation)};
 }

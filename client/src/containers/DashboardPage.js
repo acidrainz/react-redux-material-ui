@@ -62,9 +62,13 @@ class DashboardPage extends React.Component {
       );
     }
 
-  var obj = JSON.stringify(this.props.brandInformation);
-  console.log(obj[0][0])
+
   }
+    async componentDidMount(){
+      const result = await this.props.actions.getBrandInformation() /* do whatever you want with result */
+      console.log(result)
+
+    }
 
   handleDrawer(bool) {
 
@@ -103,9 +107,6 @@ class DashboardPage extends React.Component {
                           onClick={() => this.props.actions.startFetching()}
                         />
 
-
-
-
                 </div>
               </div>
         </div>
@@ -121,7 +122,6 @@ function mapStateToProps(state) {
     brandInformation: state.brandInformation,
     facebookLogin: state.facebookLogin
   };
-
 
 }
 
